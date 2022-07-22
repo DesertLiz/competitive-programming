@@ -44,13 +44,7 @@ solution = Solution()
 
 cases = ["aab", "dvdf", "dvdfatdv"]
 
-#  "abcabcbb", "bbbbb", "bb bbb", "pwwkew"]
-
 for case in cases:
   print("================")    
   print(case)
   print(solution.lengthOfLongestSubstring(case))
-
-   
-
-        # print(f's Length {len(s)}, idx {i}')
