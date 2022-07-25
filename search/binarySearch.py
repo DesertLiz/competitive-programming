@@ -1,26 +1,44 @@
-def binarySearch(sortedArr, val):
-	start  = 0
-	end = len(sortedArr) - 1
-	middle = end//2
+# https://leetcode.com/problems/binary-search/
 
-	while(sortedArr[middle] != val):
-		if(start > end):
-			return -1 
+from typing import List
 
-		if(sortedArr[middle] > val):
-			end = middle - 1
-		else:
-			start = middle + 1
-	
-		middle = (start+end)//2
+# Since input array is sorted we can choose a middle value and compare it
+# to our target. While termination condition is if middle equals target.
+# If target is less than middle work with only first half or array, etc. 
 
-	return middle
+class Solution:
+	def search(self, nums: List[int], target: int) -> int:
+		start, end= 0, len(nums) - 1
+		middle = end // 2
+
+		while(nums[middle] != target):
+			# no solution exists if our border indexes cross each other
+			if(start > end):
+				return -1
+
+			# Adjust border indexes based on where target is relative to border values
+			if(nums[middle] > target):
+				end = middle - 1
+			else:
+				start = middle + 1
+
+			# Re-calculate middle as average of current border indexes
+			middle = (start + end) // 2
+		
+		return middle
 
 
-def main():
-	result = binarySearch([-2, 0, 1, 2, 3, 4, 5, 6], 1)
+# ==============================================
 
-	print(result)
+solution = Solution()
+
+cases = [
+		{"nums": [-1,0,3,5,9,12], "target": 9},
+	 	{"nums": [-1,0,3,5,9,12], "target": 2}
+	]
 
 
-main()
+for case in cases:
+  print("================")    
+  print(case)
+  print(solution.search(case["nums"], case["target"]))
